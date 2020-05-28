@@ -21,11 +21,12 @@ COPY web/iF_SVNAdmin/ /app/svnadmin/
 RUN chmod -R 777 /app/svnadmin/
 
 RUN set -x \
-    # Install apache
+    # Install apache & SVN
     && apt-install \
         apache2 \
         subversion \
-        mod_dav_svn \
+        libapache2-mod-svn \
+        libapache2-svn \
     && sed -ri ' \
         s!^(\s*CustomLog)\s+\S+!\1 /proc/self/fd/1!g; \
         s!^(\s*ErrorLog)\s+\S+!\1 /proc/self/fd/2!g; \
