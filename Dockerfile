@@ -20,6 +20,12 @@ COPY conf/ /opt/docker/
 COPY web/iF_SVNAdmin/ /app/svnadmin/
 RUN chmod -R 777 /app/svnadmin/
 
+RUN mkdir /var/svn
+RUN touch /var/svn/passwd
+RUN touch /var/svn/authz
+RUN chown -R www-data:www-data /var/svn
+RUN chmod -R 777 /var/svn
+
 RUN set -x \
     # Install apache & SVN
     && apt-install \
@@ -32,8 +38,7 @@ RUN set -x \
         ' /etc/apache2/apache2.conf \
     && rm -f /etc/apache2/sites-enabled/* \
     && a2enmod actions proxy proxy_fcgi ssl rewrite headers expires \
-    # Install SVN 
     && docker-run-bootstrap \
     && docker-image-cleanup
 
-EXPOSE 80 443 36
+EXPOSE 80 443 3690
