@@ -12,6 +12,9 @@ ENV WEB_DOCUMENT_ROOT=/app \
     WEB_PHP_SOCKET=""
 ENV WEB_PHP_SOCKET=127.0.0.1:9000
 
+RUN rm -f /etc/apt/sources.list
+COPY apt/sources.list /etc/apt/
+
 COPY conf/ /opt/docker/
 
 COPY web/iF_SVNAdmin/ /app/svnadmin/
@@ -21,6 +24,8 @@ RUN set -x \
     # Install apache
     && apt-install \
         apache2 \
+        subversion \
+        mod_dav_svn \
     && sed -ri ' \
         s!^(\s*CustomLog)\s+\S+!\1 /proc/self/fd/1!g; \
         s!^(\s*ErrorLog)\s+\S+!\1 /proc/self/fd/2!g; \
@@ -28,7 +33,6 @@ RUN set -x \
     && rm -f /etc/apache2/sites-enabled/* \
     && a2enmod actions proxy proxy_fcgi ssl rewrite headers expires \
     # Install SVN 
-    && apk add --no-cache subversion mod_dav_svn \
     && docker-run-bootstrap \
     && docker-image-cleanup
 
