@@ -20,6 +20,7 @@ COPY conf/ /opt/docker/
 COPY web/iF_SVNAdmin/ /app/svnadmin/
 RUN chmod -R 777 /app/svnadmin/
 
+RUN cp -f /opt/docker/etc/apache2/mods-available/dav_svn.conf /etc/apache2/mods-available/
 RUN mkdir /var/svn
 RUN touch /var/svn/passwd
 RUN touch /var/svn/authz
