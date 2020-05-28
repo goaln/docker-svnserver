@@ -26,7 +26,6 @@ RUN set -x \
         apache2 \
         subversion \
         libapache2-mod-svn \
-        libapache2-svn \
     && sed -ri ' \
         s!^(\s*CustomLog)\s+\S+!\1 /proc/self/fd/1!g; \
         s!^(\s*ErrorLog)\s+\S+!\1 /proc/self/fd/2!g; \
