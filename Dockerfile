@@ -22,7 +22,7 @@ RUN chmod -R 777 /app/svnadmin/
 
 RUN mkdir /var/svn
 RUN touch /var/svn/passwd
-RUN touch /var/svn/authz
+COPY svn/authz  /var/svn/
 RUN chmod -R 777 /var/svn
 
 RUN set -x \
