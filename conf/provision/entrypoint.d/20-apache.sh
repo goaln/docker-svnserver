@@ -14,3 +14,5 @@ if [[ -z "$WEB_PHP_SOCKET" ]]; then
     ## WEB_PHP_SOCKET is not set, remove PHP files
     rm -f -- /opt/docker/etc/httpd/conf.d/10-php.conf
 fi
+
+a2enmod dav_svn
