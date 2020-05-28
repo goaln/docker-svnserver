@@ -13,7 +13,9 @@ ENV WEB_DOCUMENT_ROOT=/app \
 ENV WEB_PHP_SOCKET=127.0.0.1:9000
 
 COPY conf/ /opt/docker/
-COPY web/iF_SVNAdmin/ /app/
+
+COPY web/iF_SVNAdmin/ /app/svnadmin/
+RUN chmod -R 777 /app/svnadmin/
 
 RUN set -x \
     # Install apache
