@@ -27,7 +27,9 @@ RUN set -x \
         ' /etc/apache2/apache2.conf \
     && rm -f /etc/apache2/sites-enabled/* \
     && a2enmod actions proxy proxy_fcgi ssl rewrite headers expires \
+    # Install SVN 
+    && apk add --no-cache subversion mod_dav_svn \
     && docker-run-bootstrap \
     && docker-image-cleanup
 
-EXPOSE 80 443
+EXPOSE 80 443 36
