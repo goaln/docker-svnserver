@@ -18,11 +18,13 @@ COPY apt/sources.list /etc/apt/
 COPY conf/ /opt/docker/
 
 COPY web/iF_SVNAdmin/ /app/svnadmin/
+RUN chown -R www-data:www-data /app/svnadmin
 RUN chmod -R 777 /app/svnadmin/
 
 RUN mkdir /var/svn
 RUN touch /var/svn/passwd
-COPY svn/authz  /var/svn/
+RUN touch /var/svn/authz
+RUN chown -R www-data:www-data /var/svn
 RUN chmod -R 777 /var/svn
 
 RUN set -x \
