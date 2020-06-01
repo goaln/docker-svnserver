@@ -9,3 +9,5 @@ go-replace --mode=line --regex \
            --path=/opt/docker/etc/php/fpm/ \
            --path-pattern='*.conf'
 
+
+chown -R $PHP_UID:$PHP_UID /var/svn
